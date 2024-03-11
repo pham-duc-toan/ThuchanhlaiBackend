@@ -1,0 +1,40 @@
+mixin pagination(pagination)
+  nav
+    ul(class="pagination")
+      //- nút pre
+      if(pagination.currentPage > 1)
+        li(class="page-item")
+          button(
+            class="page-link"
+            button-pagination=pagination.currentPage-1
+          ) Trang trước
+      if(pagination.currentPage ==pagination.totalPage)
+        li(class="page-item active")
+          button(
+            class="page-link"
+            button-pagination=pagination.currentPage
+          ) #{pagination.currentPage}
+      //- các trang lân cận
+      if(pagination.currentPage>1 && pagination.currentPage<pagination.totalPage) 
+        
+        - for (var i = pagination.currentPage - 1; i <= pagination.currentPage + 1; i++)
+          li(class=`page-item ${pagination.currentPage == i ? "active" : ""}`)
+            button(
+              class="page-link"
+              button-pagination=i
+            ) #{i}
+        
+      
+      //- nút next
+      if(pagination.currentPage < pagination.totalPage)
+        if(pagination.currentPage ==1)
+          li(class="page-item active")
+            button(
+              class="page-link"
+              button-pagination=pagination.currentPage
+            ) #{pagination.currentPage}
+        li(class="page-item")
+          button(
+            class="page-link"
+            button-pagination=pagination.currentPage+1
+          ) Kế tiếp
